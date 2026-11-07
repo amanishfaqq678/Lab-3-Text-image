@@ -1,0 +1,106 @@
+
+======================================================================
+PART A: TEXT FEATURE ENGINEERING (BAG OF WORDS)
+======================================================================
+
+--- Raw Text Documents ---
+Doc 1: The sun is shining today.
+Doc 2: The weather is good, the sun is great.
+Doc 3: A sunny day is a wonderful day.
+
+--- Bag-of-Words (BoW) Transformation ---
+Vocabulary (Features): ['day' 'good' 'great' 'is' 'shining' 'sun' 'sunny' 'the' 'today' 'weather'
+ 'wonderful']
+Shape of Feature Matrix: (3, 11)
+
+BoW Numerical Feature Matrix:
+       day  good  great  is  shining  sun  sunny  the  today  weather  wonderful
+Doc 1    0     0      0   1        1    1      0    1      1        0          0
+Doc 2    0     1      1   2        0    1      0    2      0        1          0
+Doc 3    2     0      0   1        0    0      1    0      0        0          1
+
+--- CountVectorizer Defaults ---
+Lowercase enabled: True
+Token pattern: (?u)\b\w\w+\b
+'a' included in vocabulary: False
+'the' included in vocabulary: True
+
+--- Matrix Sparsity ---
+Matrix cells: 33
+Zero cells: 18
+Sparsity: 54.5%
+
+--- Exercise 1: Unigrams and Bigrams ---
+ngram_range=(1,1): 11 features
+ngram_range=(1,2): 24 features
+New bigram features: 13
+Bigrams: ['day is', 'good the', 'is good', 'is great', 'is shining', 'is wonderful', 'shining today', 'sun is', 'sunny day', 'the sun', 'the weather', 'weather is', 'wonderful day']
+
+--- Exercise 2: Add a Fourth Document ---
+       and  day  good  great  is  more  shining  sun  sunny  the  today  weather  wonderful
+Doc 1    0    0     0      0   1     0        1    1      0    1      1        0          0
+Doc 2    0    0     1      1   2     0        0    1      0    2      0        1          0
+Doc 3    0    2     0      0   1     0        0    0      1    0      0        0          1
+Doc 4    1    0     0      0   0     1        0    6      0    0      1        0          0
+
+Total token counts per document:
+Doc 1    5
+Doc 2    8
+Doc 3    5
+Doc 4    9
+Doc 4 contains repeated occurrences of 'sun'; raw counts increase with repetition.
+
+======================================================================
+PART B: IMAGE FEATURE ENGINEERING
+======================================================================
+No valid image file path provided or file not found.
+--- Created/Prepared Image (100x100 RGB) ---
+Original Image Size (H, W, Channels): (100, 100, 3)
+Total Features (Pixels) in RGB: 30000
+
+--- Grayscale Conversion (Feature Reduction) ---
+Grayscale Image Size (H, W): (100, 100)
+Total Features (Pixels) after Grayscale: 10000
+
+--- Pixel Flattening (Vectorization) ---
+Flattened Feature Vector Shape: (10000,)
+
+First 10 Features (Pixel Values):
+[ 88 156 148 180  90  57 152 151 122  36]
+
+Data Type of Final Features: uint8
+
+--- Exercise 3: Resizing Demonstration ---
+Resized to 64x64 -> vector shape (4096,)
+Resized to 32x32 -> vector shape (1024,)
+
+--- Exercise 4: image_to_features() Verification ---
+Image 1: (4096,) (expected (4096,))
+Image 2: (4096,) (expected (4096,))
+Image 3: (4096,) (expected (4096,))
+
+======================================================================
+HOME ASSIGNMENT DATASET CHECK
+======================================================================
+Place 10 or more images in each folder:
+  data/class_a/
+  data/class_b/
+The script will create dataset.npz when images are available.
+No assignment images found. Main Lab 03 practical is still complete.
+For the 20-image assignment, add 10 images to each class folder.
+
+======================================================================
+LAB 03 COMPLETED SUCCESSFULLY
+======================================================================
+
+STDERR:
+Spreadsheet runtime warmup failed during python startup
+Traceback (most recent call last):
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/patches/warm_spreadsheet_runtime_on_startup.py", line 26, in warm_spreadsheet_runtime_on_startup
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py", line 785, in warm_spreadsheet_runtime
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py", line 718, in _warm_feature_flows
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py", line 509, in _warm_drawing_and_image_flows
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/generated/interface/models.py", line 32861, in bring_to_front
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/rpc/remote.py", line 764, in __call__
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/rpc/client.py", line 175, in call
+artifact_tool.rpc.client.RemoteError: Element ordering requires an owning element collection.
